@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Phoenix Panel — Professional media reseller management platform. Manage your TV apps, DNS, live events and notifications from one dashboard.">
+<meta name="keywords" content="IPTV panel, reseller panel, media management, TV app manager, Phoenix Panel">
+<meta property="og:title" content="Phoenix Panel — Rise Above. Manage Everything.">
+<meta property="og:description" content="Professional media reseller management platform. Custom branding, DNS, live events, notifications and more.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://phoenixpanel.com">
+<title>Phoenix Panel — Rise Above. Manage Everything.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET ─────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#080808;color:#e8e0d8;line-height:1.7;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit}
+
+/* ─── CSS VARIABLES ──────────────────────────────────────── */
+:root{
+  --fire:#FE7743;
+  --fire-dim:#cc5a2e;
+  --fire-glow:rgba(254,119,67,0.15);
+  --fire-glow2:rgba(254,119,67,0.08);
+  --bg:#080808;
+  --bg2:#0f0f0f;
+  --bg3:#161616;
+  --bg4:#1e1e1e;
+  --border:#ffffff0f;
+  --border2:#ffffff18;
+  --tx1:#f5ede4;
+  --tx2:#a89585;
+  --tx3:#5a4a40;
+  --font-display:'Syne',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --r8:8px;--r12:12px;--r16:16px;--r24:24px;
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────────────── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--tx3);border-radius:4px}
+
+/* ─── NOISE TEXTURE OVERLAY ──────────────────────────────── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1000;opacity:0.4;
+}
+
+/* ─── LANG HIDDEN ────────────────────────────────────────── */
+[data-en],[data-ar],[data-fr]{display:none}
+html[data-lang="en"] [data-en]{display:block}
+html[data-lang="ar"] [data-ar]{display:block}
+html[data-lang="fr"] [data-fr]{display:block}
+html[data-lang="en"] span[data-en],
+html[data-lang="ar"] span[data-ar],
+html[data-lang="fr"] span[data-fr]{display:inline}
+html[data-lang="ar"]{direction:rtl}
+html[data-lang="ar"] body{font-family:'DM Sans',sans-serif}
+
+/* ─── NAV ────────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;height:64px;
+  background:rgba(8,8,8,0.85);
+  border-bottom:0.5px solid var(--border);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-icon{
+  width:34px;height:34px;background:var(--fire);
+  border-radius:9px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:800;font-size:14px;color:#fff;
+  letter-spacing:-0.5px;flex-shrink:0;
+}
+.nav-brand{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--tx1)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:13px;color:var(--tx2);transition:color 0.2s}
+.nav-links a:hover{color:var(--tx1)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang-switcher{display:flex;gap:4px}
+.lang-btn{
+  background:transparent;border:0.5px solid var(--border2);
+  color:var(--tx3);font-size:11px;padding:4px 8px;
+  border-radius:6px;transition:all 0.2s;font-family:var(--font-body);
+}
+.lang-btn:hover,.lang-btn.active{background:var(--fire-glow2);color:var(--fire);border-color:rgba(254,119,67,0.3)}
+.btn-nav{
+  background:var(--fire);color:#fff;border:none;
+  padding:9px 18px;border-radius:var(--r8);
+  font-size:13px;font-weight:500;
+  transition:background 0.2s,transform 0.1s;
+}
+.btn-nav:hover{background:var(--fire-dim)}
+.btn-nav:active{transform:scale(0.97)}
+.nav-mobile-menu{display:none;background:transparent;border:0.5px solid var(--border2);color:var(--tx2);padding:7px;border-radius:var(--r8)}
+
+/* ─── HERO ───────────────────────────────────────────────── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:100px 40px 60px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;top:-100px;left:50%;transform:translateX(-50%);
+  width:700px;height:500px;
+  background:radial-gradient(ellipse at center, rgba(254,119,67,0.12) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--bg3);border:0.5px solid var(--border2);
+  border-radius:20px;padding:6px 16px;
+  font-size:12px;color:var(--fire);
+  margin-bottom:28px;
+  animation:fadeUp 0.6s ease both;
+}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--fire);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.hero h1{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(38px,6vw,72px);line-height:1.05;
+  color:var(--tx1);margin-bottom:20px;
+  letter-spacing:-1.5px;
+  animation:fadeUp 0.6s 0.1s ease both;
+}
+.hero h1 .fire{color:var(--fire)}
+.hero-sub{
+  font-size:clamp(15px,2vw,18px);color:var(--tx2);
+  max-width:520px;margin:0 auto 40px;line-height:1.7;
+  animation:fadeUp 0.6s 0.2s ease both;
+}
+.hero-btns{
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:56px;
+  animation:fadeUp 0.6s 0.3s ease both;
+}
+.btn-primary{
+  background:var(--fire);color:#fff;border:none;
+  padding:14px 28px;border-radius:var(--r12);
+  font-size:15px;font-weight:500;
+  transition:all 0.2s;letter-spacing:-0.2px;
+}
+.btn-primary:hover{background:var(--fire-dim);transform:translateY(-1px)}
+.btn-primary:active{transform:scale(0.97)}
+.btn-ghost{
+  background:transparent;color:var(--tx2);
+  border:0.5px solid var(--border2);
+  padding:14px 28px;border-radius:var(--r12);
+  font-size:15px;transition:all 0.2s;
+}
+.btn-ghost:hover{border-color:var(--tx3);color:var(--tx1);background:var(--bg3)}
+.hero-stats{
+  display:flex;gap:0;border:0.5px solid var(--border);
+  border-radius:var(--r16);overflow:hidden;
+  background:var(--bg2);
+  animation:fadeUp 0.6s 0.4s ease both;
+}
+.hero-stat{padding:18px 28px;text-align:center}
+.hero-stat+.hero-stat{border-left:0.5px solid var(--border)}
+.hero-stat-num{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--tx1)}
+.hero-stat-label{font-size:11px;color:var(--tx3);margin-top:2px}
+
+/* ─── PANEL MOCKUP ───────────────────────────────────────── */
+.mockup-section{padding:0 40px 80px;display:flex;justify-content:center}
+.mockup-wrap{
+  width:100%;max-width:860px;
+  border:0.5px solid var(--border2);border-radius:var(--r16);
+  overflow:hidden;background:var(--bg2);
+  box-shadow:0 0 80px rgba(254,119,67,0.06);
+  animation:fadeUp 0.8s 0.5s ease both;
+}
+.mockup-bar{
+  background:var(--bg3);padding:12px 18px;
+  display:flex;align-items:center;gap:8px;
+  border-bottom:0.5px solid var(--border);
+}
+.mockup-dot{width:11px;height:11px;border-radius:50%}
+.mockup-url{
+  flex:1;text-align:center;font-size:12px;color:var(--tx3);
+  font-family:monospace;
+}
+.mockup-body{display:flex;height:220px}
+.mockup-sidebar{
+  width:160px;background:var(--bg3);
+  border-right:0.5px solid var(--border);
+  padding:14px 10px;flex-shrink:0;
+}
+.mockup-logo{
+  display:flex;align-items:center;gap:8px;
+  padding:0 4px 14px;border-bottom:0.5px solid var(--border);margin-bottom:10px;
+}
+.mockup-logo-box{
+  width:26px;height:26px;background:var(--fire);
+  border-radius:6px;display:flex;align-items:center;
+  justify-content:center;font-family:var(--font-display);
+  font-size:11px;font-weight:800;color:#fff;
+}
+.mockup-logo-name{font-size:12px;font-weight:500;color:var(--tx1)}
+.m-nav{display:flex;align-items:center;gap:7px;padding:7px 8px;border-radius:7px;font-size:11px;color:var(--tx3);margin-bottom:2px}
+.m-nav.active{background:var(--fire-glow2);color:var(--fire)}
+.m-nav-icon{font-size:14px}
+.mockup-content{flex:1;padding:16px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.mockup-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.m-stat{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--r8);padding:10px 12px}
+.m-stat-label{font-size:9px;color:var(--tx3);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
+.m-stat-val{font-family:var(--font-display);font-size:17px;font-weight:700}
+.m-stat-val.fire{color:var(--fire)}
+.m-stat-val.green{color:#5eca8a}
+.m-stat-val.amber{color:#f0b429}
+.m-app-row{
+  background:var(--bg3);border:0.5px solid var(--border);
+  border-radius:var(--r8);padding:10px 12px;
+  display:flex;align-items:center;gap:10px;
+}
+.m-app-icon{
+  width:28px;height:28px;background:var(--bg4);
+  border-radius:7px;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;border:0.5px solid var(--border2);
+}
+.m-app-name{font-size:12px;color:var(--tx1);font-weight:500}
+.m-app-sub{font-size:10px;color:var(--tx3)}
+.m-app-badge{
+  margin-left:auto;background:var(--fire-glow2);
+  color:var(--fire);font-size:10px;padding:3px 8px;
+  border-radius:20px;border:0.5px solid rgba(254,119,67,0.2);
+}
+
+/* ─── SECTIONS SHARED ────────────────────────────────────── */
+section{padding:80px 40px}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{
+  font-size:11px;font-weight:500;color:var(--fire);
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;
+}
+.section-title{
+  font-family:var(--font-display);font-size:clamp(26px,4vw,40px);
+  font-weight:700;color:var(--tx1);margin-bottom:10px;
+  letter-spacing:-0.8px;line-height:1.15;
+}
+.section-sub{font-size:15px;color:var(--tx2);max-width:520px;line-height:1.7}
+.section-header{margin-bottom:48px}
+.section-header.center{text-align:center}
+.section-header.center .section-sub{margin:0 auto}
+
+/* ─── DIVIDER ────────────────────────────────────────────── */
+.divider{border:none;border-top:0.5px solid var(--border);margin:0}
+
+/* ─── FEATURES ───────────────────────────────────────────── */
+.features{background:var(--bg2)}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;border:0.5px solid var(--border);border-radius:var(--r16);overflow:hidden;background:var(--border)}
+.feat-card{
+  background:var(--bg2);padding:28px;
+  transition:background 0.2s;
+}
+.feat-card:hover{background:var(--bg3)}
+.feat-icon{
+  width:42px;height:42px;background:var(--fire-glow);
+  border-radius:11px;display:flex;align-items:center;
+  justify-content:center;margin-bottom:18px;
+  border:0.5px solid rgba(254,119,67,0.15);
+}
+.feat-icon svg{width:20px;height:20px;stroke:var(--fire);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.feat-title{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--tx1);margin-bottom:8px}
+.feat-desc{font-size:13px;color:var(--tx2);line-height:1.7}
+
+/* ─── PLATFORMS ──────────────────────────────────────────── */
+.platforms{background:var(--bg)}
+.platform-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.platform-pill{
+  display:flex;align-items:center;gap:9px;
+  background:var(--bg2);border:0.5px solid var(--border2);
+  border-radius:20px;padding:10px 18px;font-size:13px;color:var(--tx2);
+  transition:all 0.2s;
+}
+.platform-pill:hover{border-color:rgba(254,119,67,0.3);color:var(--tx1)}
+.platform-pill svg{width:17px;height:17px;stroke:var(--fire);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* ─── PRICING ────────────────────────────────────────────── */
+.pricing{background:var(--bg2)}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:620px;margin:0 auto 28px}
+.price-card{
+  background:var(--bg3);border:0.5px solid var(--border2);
+  border-radius:var(--r16);padding:28px;position:relative;
+}
+.price-card.vip{border-color:rgba(254,119,67,0.35)}
+.vip-badge{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--fire);color:#fff;font-size:11px;font-weight:500;
+  padding:4px 14px;border-radius:20px;white-space:nowrap;
+}
+.price-tier{font-size:11px;color:var(--tx3);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px}
+.price-amount{font-family:var(--font-display);font-size:36px;font-weight:800;color:var(--tx1);letter-spacing:-1px}
+.price-amount span{font-size:14px;font-weight:400;color:var(--tx3);letter-spacing:0}
+.price-tagline{font-size:12px;color:var(--tx3);margin:8px 0 20px}
+.price-hr{border:none;border-top:0.5px solid var(--border);margin-bottom:18px}
+.price-feat{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--tx2);margin-bottom:10px}
+.price-feat svg{width:15px;height:15px;flex-shrink:0}
+.price-feat.yes svg{stroke:#5eca8a}
+.price-feat.no svg{stroke:var(--tx3)}
+.price-btn{
+  width:100%;margin-top:20px;padding:11px;
+  border-radius:var(--r8);font-size:14px;font-weight:500;
+  transition:all 0.2s;
+}
+.price-btn-ghost{background:transparent;color:var(--tx2);border:0.5px solid var(--border2)}
+.price-btn-ghost:hover{background:var(--bg4);color:var(--tx1)}
+.price-btn-fire{background:var(--fire);color:#fff;border:none}
+.price-btn-fire:hover{background:var(--fire-dim)}
+.discount-pills{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.discount-pill{
+  background:var(--bg3);border:0.5px solid var(--border2);
+  border-radius:20px;padding:7px 16px;font-size:12px;color:var(--tx2);
+}
+.discount-pill strong{color:#5eca8a}
+
+/* ─── CREDITS ────────────────────────────────────────────── */
+.credits-section{background:var(--bg)}
+.credit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:36px}
+.credit-card{
+  background:var(--bg2);border:0.5px solid var(--border);
+  border-radius:var(--r12);padding:20px;
+  transition:border-color 0.2s;
+}
+.credit-card:hover{border-color:var(--border2)}
+.credit-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--fire-glow2);border:0.5px solid rgba(254,119,67,0.2);
+  color:var(--fire);font-size:12px;padding:4px 10px;
+  border-radius:20px;margin-bottom:12px;
+}
+.credit-name{font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--tx1);margin-bottom:6px}
+.credit-desc{font-size:12px;color:var(--tx3);line-height:1.6}
+.credit-note{
+  margin-top:28px;background:var(--bg2);border:0.5px solid var(--border);
+  border-left:3px solid var(--fire);border-radius:var(--r8);
+  padding:14px 18px;font-size:13px;color:var(--tx2);
+}
+
+/* ─── HOW IT WORKS ───────────────────────────────────────── */
+.how{background:var(--bg2)}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;margin-top:48px}
+.step{position:relative}
+.step:not(:last-child)::after{
+  content:'';position:absolute;
+  top:20px;left:calc(100% + 12px);
+  width:calc(0%);height:1px;background:var(--border2);
+}
+.step-num{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--bg3);border:0.5px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:14px;font-weight:700;
+  color:var(--fire);margin-bottom:16px;
+}
+.step-title{font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--tx1);margin-bottom:6px}
+.step-desc{font-size:13px;color:var(--tx3);line-height:1.65}
+
+/* ─── CTA ────────────────────────────────────────────────── */
+.cta-section{background:var(--bg);padding:80px 40px}
+.cta-box{
+  max-width:760px;margin:0 auto;
+  background:var(--bg2);border:0.5px solid var(--border2);
+  border-radius:24px;padding:60px 48px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-glow{
+  position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);
+  width:500px;height:300px;
+  background:radial-gradient(ellipse,rgba(254,119,67,0.1) 0%,transparent 70%);
+  pointer-events:none;
+}
+.cta-box h2{
+  font-family:var(--font-display);font-size:clamp(24px,4vw,38px);
+  font-weight:800;color:var(--tx1);margin-bottom:14px;
+  letter-spacing:-0.8px;
+}
+.cta-box p{font-size:15px;color:var(--tx2);margin-bottom:32px;line-height:1.7}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta-note{font-size:12px;color:var(--tx3);margin-top:20px}
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+footer{
+  background:var(--bg2);
+  border-top:0.5px solid var(--border);
+  padding:28px 40px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+}
+.footer-brand{display:flex;align-items:center;gap:9px}
+.footer-icon{width:28px;height:28px;background:var(--fire);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:11px;font-weight:800;color:#fff}
+.footer-name{font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--tx2)}
+.footer-copy{font-size:12px;color:var(--tx3)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:12px;color:var(--tx3);transition:color 0.2s}
+.footer-links a:hover{color:var(--tx2)}
+
+/* ─── ANIMATIONS ─────────────────────────────────────────── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ─── MOBILE ─────────────────────────────────────────────── */
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .nav-mobile-menu{display:flex}
+  .hero{padding:90px 20px 50px}
+  .hero-stats{flex-direction:column;border-radius:var(--r12)}
+  .hero-stat+.hero-stat{border-left:none;border-top:0.5px solid var(--border)}
+  section{padding:60px 20px}
+  .mockup-section{padding:0 20px 60px}
+  .mockup-body{height:auto;flex-direction:column}
+  .mockup-sidebar{width:100%;height:auto;border-right:none;border-bottom:0.5px solid var(--border);padding:10px;display:flex;gap:6px;align-items:center;overflow-x:auto}
+  .mockup-logo{display:none}
+  .m-nav{white-space:nowrap}
+  .pricing-grid{grid-template-columns:1fr}
+  .cta-box{padding:36px 24px}
+  footer{flex-direction:column;text-align:center;padding:24px 20px}
+}
+@media(max-width:480px){
+  .hero h1{font-size:32px}
+  .hero-btns{flex-direction:column;align-items:stretch}
+  .btn-primary,.btn-ghost{text-align:center}
+  .steps-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     NAVBAR
+     Why: Fixed at top — always visible. Logo on left,
+     nav links in middle, language switcher + CTA on right.
+     The backdrop-filter gives it a frosted glass effect
+     over the page content as you scroll.
+════════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">PX</div>
+    <span class="nav-brand">Phoenix Panel</span>
+  </div>
+
+  <div class="nav-links">
+    <a href="#features" data-en>Features</a>
+    <a href="#features" data-ar>المميزات</a>
+    <a href="#features" data-fr>Fonctionnalités</a>
+
+    <a href="#pricing" data-en>Pricing</a>
+    <a href="#pricing" data-ar>الأسعار</a>
+    <a href="#pricing" data-fr>Tarifs</a>
+
+    <a href="#how" data-en>How it works</a>
+    <a href="#how" data-ar>كيف يعمل</a>
+    <a href="#how" data-fr>Comment ça marche</a>
+
+    <a href="#contact" data-en>Contact</a>
+    <a href="#contact" data-ar>تواصل</a>
+    <a href="#contact" data-fr>Contact</a>
+  </div>
+
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ar')">AR</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    </div>
+    <a href="https://t.me/YOUR_USERNAME" target="_blank" data-tg>
+      <button class="btn-nav">
+        <span data-en>Contact us</span>
+        <span data-ar>تواصل معنا</span>
+        <span data-fr>Nous contacter</span>
+      </button>
+    </a>
+    <button class="nav-mobile-menu" onclick="toggleMenu()" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     HERO SECTION
+     Why: First thing visitors see. Grid background
+     gives depth. Glow effect draws the eye to center.
+     Stats row builds instant trust with numbers.
+════════════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    <span data-en>Media reseller platform</span>
+    <span data-ar>منصة إدارة الموزعين</span>
+    <span data-fr>Plateforme pour revendeurs</span>
+  </div>
+
+  <h1>
+    <span data-en>Manage your<br><span class="fire">TV apps</span> like a pro</span>
+    <span data-ar>أدر تطبيقاتك<br><span class="fire">كالمحترفين</span></span>
+    <span data-fr>Gérez vos<br><span class="fire">apps TV</span> en expert</span>
+  </h1>
+
+  <p class="hero-sub">
+    <span data-en>One powerful dashboard to control all your TV applications — branding, DNS, live events, notifications, and subscriptions.</span>
+    <span data-ar>لوحة تحكم واحدة قوية لإدارة جميع تطبيقات التلفزيون — الهوية، DNS، الأحداث المباشرة، الإشعارات، والاشتراكات.</span>
+    <span data-fr>Un tableau de bord puissant pour gérer toutes vos applications TV — branding, DNS, événements en direct, notifications et abonnements.</span>
+  </p>
+
+  <div class="hero-btns">
+    <a href="https://t.me/YOUR_USERNAME" target="_blank" data-tg>
+      <button class="btn-primary">
+        <span data-en>Get started — contact us</span>
+        <span data-ar>ابدأ — تواصل معنا</span>
+        <span data-fr>Démarrer — nous contacter</span>
+      </button>
+    </a>
+    <a href="#how">
+      <button class="btn-ghost">
+        <span data-en>See how it works</span>
+        <span data-ar>شاهد كيف يعمل</span>
+        <span data-fr>Voir comment ça marche</span>
+      </button>
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">$180</div>
+      <div class="hero-stat-label" data-en>One-time app setup</div>
+      <div class="hero-stat-label" data-ar>إعداد التطبيق مرة واحدة</div>
+      <div class="hero-stat-label" data-fr>Configuration unique</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">7d</div>
+      <div class="hero-stat-label" data-en>Free trial, no card</div>
+      <div class="hero-stat-label" data-ar>تجربة مجانية بدون بطاقة</div>
+      <div class="hero-stat-label" data-fr>Essai gratuit sans carte</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">4</div>
+      <div class="hero-stat-label" data-en>Platforms supported</div>
+      <div class="hero-stat-label" data-ar>منصات مدعومة</div>
+      <div class="hero-stat-label" data-fr>Plateformes supportées</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">24h</div>
+      <div class="hero-stat-label" data-en>App ready in 24 hours</div>
+      <div class="hero-stat-label" data-ar>التطبيق جاهز في 24 ساعة</div>
+      <div class="hero-stat-label" data-fr>App prête en 24 heures</div>
+    </div>
+  </div>
+</section>
+
+<!-- Panel Mockup Preview -->
+<div class="mockup-section reveal">
+  <div class="mockup-wrap">
+    <div class="mockup-bar">
+      <div class="mockup-dot" style="background:#ff5f57"></div>
+      <div class="mockup-dot" style="background:#febc2e"></div>
+      <div class="mockup-dot" style="background:#28c840"></div>
+      <div class="mockup-url">app.phoenixpanel.com — My TV apps</div>
+    </div>
+    <div class="mockup-body">
+      <div class="mockup-sidebar">
+        <div class="mockup-logo">
+          <div class="mockup-logo-box">PX</div>
+          <span class="mockup-logo-name">Phoenix</span>
+        </div>
+        <div class="m-nav active">
+          <svg class="m-nav-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <span data-en>My TV apps</span><span data-ar>تطبيقاتي</span><span data-fr>Mes apps</span>
+        </div>
+        <div class="m-nav">
+          <svg class="m-nav-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+          <span data-en>Credits log</span><span data-ar>سجل الكريديت</span><span data-fr>Historique</span>
+        </div>
+      </div>
+      <div class="mockup-content">
+        <div class="mockup-stats">
+          <div class="m-stat"><div class="m-stat-label">Total spent</div><div class="m-stat-val fire">$245</div></div>
+          <div class="m-stat"><div class="m-stat-label">My credits</div><div class="m-stat-val amber">42</div></div>
+          <div class="m-stat"><div class="m-stat-label">Active apps</div><div class="m-stat-val green">3</div></div>
+        </div>
+        <div class="m-app-row">
+          <div class="m-app-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FE7743" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div>
+            <div class="m-app-name">MyStream App</div>
+            <div class="m-app-sub">VIP · expires 2025-12-01</div>
+          </div>
+          <div class="m-app-badge">VIP</div>
+        </div>
+        <div class="m-app-row">
+          <div class="m-app-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FE7743" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div>
+            <div class="m-app-name">SportzTV</div>
+            <div class="m-app-sub">Basic · expires 2025-10-15</div>
+          </div>
+          <div class="m-app-badge" style="color:var(--tx3);background:var(--bg4);border-color:var(--border2)">Basic</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════
+     FEATURES SECTION
+     Why: 6 cards in a grid separated by thin lines.
+     Each card has a fire-colored icon, a title, and
+     a short description. Grid layout with 1px gaps
+     creates a clean "table" feel without borders.
+════════════════════════════════════════════════════ -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-label" data-en>Features</div>
+      <div class="section-label" data-ar>المميزات</div>
+      <div class="section-label" data-fr>Fonctionnalités</div>
+
+      <h2 class="section-title">
+        <span data-en>Everything a reseller needs</span>
+        <span data-ar>كل ما يحتاجه الموزع</span>
+        <span data-fr>Tout ce qu'un revendeur nécessite</span>
+      </h2>
+      <p class="section-sub">
+        <span data-en>No technical knowledge required. Manage everything from one clean dashboard.</span>
+        <span data-ar>لا تحتاج خبرة تقنية. أدر كل شيء من لوحة تحكم واحدة.</span>
+        <span data-fr>Aucune connaissance technique requise. Gérez tout depuis un seul tableau de bord.</span>
+      </p>
+    </div>
+
+    <div class="feat-grid reveal">
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
+        <div class="feat-title" data-en>Custom branding</div>
+        <div class="feat-title" data-ar>هوية مخصصة</div>
+        <div class="feat-title" data-fr>Branding personnalisé</div>
+        <p class="feat-desc" data-en>Your logo, your colors. Each app looks completely unique to your brand.</p>
+        <p class="feat-desc" data-ar>شعارك وألوانك. كل تطبيق يعكس هويتك التجارية بشكل فريد.</p>
+        <p class="feat-desc" data-fr>Votre logo, vos couleurs. Chaque app reflète votre marque.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg>
+        </div>
+        <div class="feat-title" data-en>Multi-DNS support</div>
+        <div class="feat-title" data-ar>دعم متعدد DNS</div>
+        <div class="feat-title" data-fr>Support multi-DNS</div>
+        <p class="feat-desc" data-en>Add multiple DNS servers for better uptime. VIP gets up to 4 DNS slots.</p>
+        <p class="feat-desc" data-ar>أضف خوادم DNS متعددة لتحسين الأداء. VIP يصل إلى 4 خوادم.</p>
+        <p class="feat-desc" data-fr>Ajoutez plusieurs serveurs DNS pour une meilleure disponibilité.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="feat-title" data-en>Live events</div>
+        <div class="feat-title" data-ar>أحداث مباشرة</div>
+        <div class="feat-title" data-fr>Événements en direct</div>
+        <p class="feat-desc" data-en>Schedule matches and events with date and time. Auto-clears when expired.</p>
+        <p class="feat-desc" data-ar>جدول المباريات والأحداث بتاريخ ووقت محدد. يُنظف تلقائياً عند انتهاء الوقت.</p>
+        <p class="feat-desc" data-fr>Planifiez matchs et événements avec date et heure. Nettoyage automatique.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <div class="feat-title" data-en>Push notifications</div>
+        <div class="feat-title" data-ar>إشعارات فورية</div>
+        <div class="feat-title" data-fr>Notifications push</div>
+        <p class="feat-desc" data-en>Send time-based alerts to your users directly inside the app.</p>
+        <p class="feat-desc" data-ar>أرسل تنبيهات مجدولة لمستخدميك مباشرة داخل التطبيق.</p>
+        <p class="feat-desc" data-fr>Envoyez des alertes programmées directement dans l'application.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="feat-title" data-en>Suspend and expire</div>
+        <div class="feat-title" data-ar>تعليق وانتهاء الصلاحية</div>
+        <div class="feat-title" data-fr>Suspension et expiration</div>
+        <p class="feat-desc" data-en>Non-paying users see a black screen. You stay in full control at all times.</p>
+        <p class="feat-desc" data-ar>المستخدمون غير الملتزمين يرون شاشة سوداء. أنت في تحكم كامل.</p>
+        <p class="feat-desc" data-fr>Les non-payeurs voient un écran noir. Vous gardez le contrôle total.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="feat-title" data-en>Credits log</div>
+        <div class="feat-title" data-ar>سجل الكريديت</div>
+        <div class="feat-title" data-fr>Journal des crédits</div>
+        <p class="feat-desc" data-en>Full audit trail of every credit spent — for both reseller and admin.</p>
+        <p class="feat-desc" data-ar>سجل كامل لكل كريديت مُنفق — للموزع والمشرف معاً.</p>
+        <p class="feat-desc" data-fr>Historique complet de chaque crédit dépensé — pour revendeur et admin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════
+     PLATFORMS SECTION
+     Why: Quick visual trust-builder. Pills show
+     which devices the app works on. Kept simple.
+════════════════════════════════════════════════════ -->
+<section class="platforms" id="platforms">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-label" data-en>Platforms</div>
+      <div class="section-label" data-ar>المنصات</div>
+      <div class="section-label" data-fr>Plateformes</div>
+      <h2 class="section-title">
+        <span data-en>Works on every screen</span>
+        <span data-ar>يعمل على كل الشاشات</span>
+        <span data-fr>Fonctionne sur tous les écrans</span>
+      </h2>
+    </div>
+    <div class="platform-row reveal">
+      <div class="platform-pill">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <span data-en>Android TV</span><span data-ar>Android TV</span><span data-fr>Android TV</span>
+      </div>
+      <div class="platform-pill">
+        <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22h6M12 17v.01"/></svg>
+        <span data-en>Android Box</span><span data-ar>Android Box</span><span data-fr>Android Box</span>
+      </div>
+      <div class="platform-pill">
+        <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+        <span data-en>Mobile (Android)</span><span data-ar>الهاتف المحمول</span><span data-fr>Mobile (Android)</span>
+      </div>
+      <div class="platform-pill">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <span data-en>Tizen (Samsung TV)</span><span data-ar>Tizen (تلفزيون Samsung)</span><span data-fr>Tizen (Samsung TV)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════
+     PRICING SECTION
+     Why: Two cards side by side. VIP has orange
+     border and "Most popular" badge. Discount pills
+     below show long-term savings clearly.
+════════════════════════════════════════════════════ -->
+<section class="pricing" id="pricing">
+  <div class="section-inner">
+    <div class="section-header center reveal">
+      <div class="section-label" data-en>Pricing</div>
+      <div class="section-label" data-ar>الأسعار</div>
+      <div class="section-label" data-fr>Tarifs</div>
+      <h2 class="section-title">
+        <span data-en>Simple, transparent pricing</span>
+        <span data-ar>أسعار شفافة وبسيطة</span>
+        <span data-fr>Tarifs simples et transparents</span>
+      </h2>
+      <p class="section-sub">
+        <span data-en>One-time setup fee + monthly subscription per app. No hidden fees ever.</span>
+        <span data-ar>رسوم إعداد مرة واحدة + اشتراك شهري لكل تطبيق. لا رسوم خفية.</span>
+        <span data-fr>Frais de configuration unique + abonnement mensuel par app. Sans frais cachés.</span>
+      </p>
+    </div>
+
+    <div class="pricing-grid reveal">
+      <!-- BASIC -->
+      <div class="price-card">
+        <div class="price-tier" data-en>Basic plan</div>
+        <div class="price-tier" data-ar>الباقة الأساسية</div>
+        <div class="price-tier" data-fr>Plan Basic</div>
+        <div class="price-amount">$15 <span>/ <span data-en>month</span><span data-ar>شهر</span><span data-fr>mois</span></span></div>
+        <div class="price-tagline" data-en>Perfect to get started</div>
+        <div class="price-tagline" data-ar>مثالي للبداية</div>
+        <div class="price-tagline" data-fr>Parfait pour commencer</div>
+        <hr class="price-hr">
+        <div class="price-feat yes">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-en>1 DNS server</span><span data-ar>خادم DNS واحد</span><span data-fr>1 serveur DNS</span>
+        </div>
+        <div class="price-feat yes">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-en>8 live event slots</span><span data-ar>8 خانات أحداث مباشرة</span><span data-fr>8 slots d'événements</span>
+        </div>
+        <div class="price-feat yes">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-en>3 notification slots</span><span data-ar>3 خانات إشعارات</span><span data-fr>3 slots de notifications</span>
+        </div>
+        <div class="price-feat yes">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-en>Show/hide sections</span><span data-ar>إظهار/إخفاء الأقسام</span><span data-fr>Afficher/masquer sections</span>
+        </div>
+        <div class="price-feat no">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <span data-en>Extra DNS (VIP only)</span><span data-ar>DNS إضافي (VIP فقط)</span><span data-fr>DNS supplémentaire (VIP)</span>
+        </div>
+        <button class="price-btn price-btn-ghost" onclick="window.open(TG_LINK,'_blank')">
+          <span data-en>Get Basic</span><span data-ar>احصل على Basic</span><span data-fr>Choisir Basic</span>
+        </button>
+      </div>
+
+      <!-- VIP -->
+      <div class="price-card vip">
+        <div class="vip-badge">
+          <span data-en>Most popular</span>
+          <span data-ar>الأكثر طلباً</span>
+          <span data-fr>Le plus populaire</span>
+        </div>
+        <div class="price-tier" data-en>VIP plan</div>
+        <div class="price-tier" data-ar>باقة VIP</div>
+        <div class="price-tier" data-fr>Plan VIP</div>
+        <div class="price-amount">$35 <span>/ <span data-en>month</span><span data-ar>شهر</span><span data-fr>mois</span></span></div>
+        <div class="price-tagline" data-en>For serious resellers</div>
+        <div class="price-tagline" data-ar>للموزعين المحترفين</div>
+        <div class="price-tagline" data-fr>Pour les revendeurs sérieux</div>
+        <hr class="price-hr">
+        <div class="price-feat yes">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-en>3 DNS servers included</span><span data-ar>3 خوادم DNS مدرجة</span><span data-fr>3 serveurs DNS inclus</span>
+        </div>
+        <div class="price-feat yes">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-en>15 live event slots</span><span data-ar>15 خانة أحداث مباشرة</span><span data-fr>15 slots d'événements</span>
+        </div>
+        <div class="price-feat yes">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-en>10 notification slots</span><span data-ar>10 خانات إشعارات</span><span data-fr>10 slots de notifications</span>
+        </div>
+        <div class="price-feat yes">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-en>No update cooldown</span><span data-ar>لا قيود على التحديث</span><span data-fr>Pas de délai de mise à jour</span>
+        </div>
+        <div class="price-feat yes">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-en>Unlock extra DNS slots</span><span data-ar>فتح خوادم DNS إضافية</span><span data-fr>Débloquer DNS supplémentaires</span>
+        </div>
+        <button class="price-btn price-btn-fire" onclick="window.open(TG_LINK,'_blank')">
+          <span data-en>Get VIP</span><span data-ar>احصل على VIP</span><span data-fr>Choisir VIP</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="discount-pills reveal">
+      <div class="discount-pill"><span data-en>6 months</span><span data-ar>6 أشهر</span><span data-fr>6 mois</span> — <strong data-en>15% off</strong><strong data-ar>خصم 15%</strong><strong data-fr>15% de réduction</strong></div>
+      <div class="discount-pill"><span data-en>1 year</span><span data-ar>سنة كاملة</span><span data-fr>1 an</span> — <strong data-en>25% off</strong><strong data-ar>خصم 25%</strong><strong data-fr>25% de réduction</strong></div>
+      <div class="discount-pill"><span data-en>App setup from</span><span data-ar>إعداد التطبيق من</span><span data-fr>Configuration à partir de</span> <strong>$180</strong> <span data-en>one-time</span><span data-ar>مرة واحدة</span><span data-fr>unique</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════
+     CREDITS SYSTEM SECTION
+     Why: Needs its own section because visitors
+     won't understand it from pricing alone.
+     4 cards show exactly what each credit buys.
+     The note at bottom explains the reset logic.
+════════════════════════════════════════════════════ -->
+<section class="credits-section" id="credits">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-label" data-en>Credit system</div>
+      <div class="section-label" data-ar>نظام الكريديت</div>
+      <div class="section-label" data-fr>Système de crédits</div>
+      <h2 class="section-title">
+        <span data-en>Unlock more as you grow</span>
+        <span data-ar>افتح المزيد مع نموك</span>
+        <span data-fr>Débloquez plus en grandissant</span>
+      </h2>
+      <p class="section-sub">
+        <span data-en>1 credit = $1. Buy credits anytime and use them to expand your app's capacity beyond the plan limits.</span>
+        <span data-ar>1 كريديت = 1$. اشتر كريديتات في أي وقت واستخدمها لتوسيع قدرة تطبيقك.</span>
+        <span data-fr>1 crédit = 1$. Achetez des crédits à tout moment pour étendre la capacité de votre app.</span>
+      </p>
+    </div>
+
+    <div class="credit-grid reveal">
+      <div class="credit-card">
+        <div class="credit-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          8 <span data-en>credits</span><span data-ar>كريديت</span><span data-fr>crédits</span>
+        </div>
+        <div class="credit-name" data-en>Extra DNS slot</div>
+        <div class="credit-name" data-ar>خانة DNS إضافية</div>
+        <div class="credit-name" data-fr>Slot DNS supplémentaire</div>
+        <p class="credit-desc" data-en>Add one more DNS server. VIP only — up to 4 total.</p>
+        <p class="credit-desc" data-ar>أضف خادم DNS آخر. VIP فقط — حتى 4 خوادم.</p>
+        <p class="credit-desc" data-fr>Ajoutez un serveur DNS. VIP uniquement — jusqu'à 4.</p>
+      </div>
+      <div class="credit-card">
+        <div class="credit-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          3 <span data-en>credits</span><span data-ar>كريديت</span><span data-fr>crédits</span>
+        </div>
+        <div class="credit-name" data-en>Extra event slot</div>
+        <div class="credit-name" data-ar>خانة حدث إضافية</div>
+        <div class="credit-name" data-fr>Slot événement supplémentaire</div>
+        <p class="credit-desc" data-en>Add one more live event. Up to 12 (Basic) or 20 (VIP).</p>
+        <p class="credit-desc" data-ar>أضف حدثاً مباشراً. حتى 12 (أساسي) أو 20 (VIP).</p>
+        <p class="credit-desc" data-fr>Ajoutez un événement live. Jusqu'à 12 (Basic) ou 20 (VIP).</p>
+      </div>
+      <div class="credit-card">
+        <div class="credit-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          7 <span data-en>credits</span><span data-ar>كريديت</span><span data-fr>crédits</span>
+        </div>
+        <div class="credit-name" data-en>Notification bundle</div>
+        <div class="credit-name" data-ar>باقة إشعارات</div>
+        <div class="credit-name" data-fr>Pack notifications</div>
+        <p class="credit-desc" data-en>Unlock 3 extra notification slots. Maximum 15 total.</p>
+        <p class="credit-desc" data-ar>افتح 3 خانات إشعارات إضافية. الحد الأقصى 15.</p>
+        <p class="credit-desc" data-fr>Débloquez 3 slots de notifications. Maximum 15 au total.</p>
+      </div>
+      <div class="credit-card" style="border-color:rgba(254,119,67,0.2)">
+        <div class="credit-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          10 <span data-en>credits free</span><span data-ar>كريديت مجاناً</span><span data-fr>crédits offerts</span>
+        </div>
+        <div class="credit-name" data-en>Free on every trial</div>
+        <div class="credit-name" data-ar>مجاناً مع كل تجربة</div>
+        <div class="credit-name" data-fr>Offerts à chaque essai</div>
+        <p class="credit-desc" data-en>Every new reseller gets 10 free credits to test the system during the 7-day trial.</p>
+        <p class="credit-desc" data-ar>كل موزع جديد يحصل على 10 كريديت مجاناً لاختبار النظام خلال فترة التجربة.</p>
+        <p class="credit-desc" data-fr>Chaque nouveau revendeur reçoit 10 crédits gratuits pour tester pendant 7 jours.</p>
+      </div>
+    </div>
+
+    <div class="credit-note reveal">
+      <span data-en>Credits spent on extra slots are valid for your active subscription period. When you renew, unlocked slots reset — you only pay again if you still want the extras.</span>
+      <span data-ar>الكريديتات المُنفقة على الخانات الإضافية صالحة لفترة الاشتراك الحالية. عند التجديد، تُعاد الخانات المفتوحة — تدفع مرة أخرى فقط إذا أردت الإضافات.</span>
+      <span data-fr>Les crédits dépensés pour les slots supplémentaires sont valides pour la période d'abonnement active. Au renouvellement, les slots débloqués sont réinitialisés.</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════
+     HOW IT WORKS
+     Why: Resellers want to know the process before
+     committing. 4 numbered steps from contact to
+     active subscription. Keeps it simple and clear.
+════════════════════════════════════════════════════ -->
+<section class="how" id="how">
+  <div class="section-inner">
+    <div class="section-header center reveal">
+      <div class="section-label" data-en>How it works</div>
+      <div class="section-label" data-ar>كيف يعمل</div>
+      <div class="section-label" data-fr>Comment ça marche</div>
+      <h2 class="section-title">
+        <span data-en>Up and running in 24 hours</span>
+        <span data-ar>جاهز للعمل في 24 ساعة</span>
+        <span data-fr>Opérationnel en 24 heures</span>
+      </h2>
+    </div>
+    <div class="steps-grid reveal">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title" data-en>Contact us</div>
+        <div class="step-title" data-ar>تواصل معنا</div>
+        <div class="step-title" data-fr>Contactez-nous</div>
+        <p class="step-desc" data-en>Send us your branding — logo and colors — and pay via USDT. We confirm within hours.</p>
+        <p class="step-desc" data-ar>أرسل لنا شعارك وألوانك وادفع عبر USDT. نؤكد خلال ساعات.</p>
+        <p class="step-desc" data-fr>Envoyez votre branding et payez via USDT. Confirmation en quelques heures.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title" data-en>Get your app</div>
+        <div class="step-title" data-ar>احصل على تطبيقك</div>
+        <div class="step-title" data-fr>Recevez votre app</div>
+        <p class="step-desc" data-en>We build your custom TV app and set up your panel access. Ready in 24 hours.</p>
+        <p class="step-desc" data-ar>نبني تطبيق التلفزيون المخصص ونُعد لوحة التحكم. جاهز في 24 ساعة.</p>
+        <p class="step-desc" data-fr>Nous créons votre app TV personnalisée et configurons votre accès au panneau.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title" data-en>7-day free trial</div>
+        <div class="step-title" data-ar>تجربة مجانية 7 أيام</div>
+        <div class="step-title" data-fr>Essai gratuit 7 jours</div>
+        <p class="step-desc" data-en>Test everything with 10 free credits included. No commitment required.</p>
+        <p class="step-desc" data-ar>اختبر كل شيء مع 10 كريديت مجانية. لا التزام مطلوب.</p>
+        <p class="step-desc" data-fr>Testez tout avec 10 crédits offerts. Aucun engagement requis.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title" data-en>Subscribe and grow</div>
+        <div class="step-title" data-ar>اشترك وانمُ</div>
+        <div class="step-title" data-fr>Abonnez-vous et évoluez</div>
+        <p class="step-desc" data-en>Pick Basic or VIP, add more apps as your business grows. Credits available anytime.</p>
+        <p class="step-desc" data-ar>اختر Basic أو VIP، أضف المزيد من التطبيقات مع نمو عملك. كريديتات متاحة دائماً.</p>
+        <p class="step-desc" data-fr>Choisissez Basic ou VIP, ajoutez des apps au fil de votre croissance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════
+     CTA + CONTACT SECTION
+     Why: Final push at the bottom. Two buttons —
+     one to start the trial, one to contact on
+     Telegram. The Telegram link is a placeholder
+     — you will replace YOUR_USERNAME with yours.
+════════════════════════════════════════════════════ -->
+<section class="cta-section" id="contact">
+  <div class="cta-box reveal">
+    <div class="cta-glow"></div>
+    <h2>
+      <span data-en>Ready to launch your TV brand?</span>
+      <span data-ar>مستعد لإطلاق علامتك التجارية؟</span>
+      <span data-fr>Prêt à lancer votre marque TV ?</span>
+    </h2>
+    <p>
+      <span data-en>Start with a 7-day free trial. No credit card required. Payment via USDT only.</span>
+      <span data-ar>ابدأ بتجربة مجانية 7 أيام. لا بطاقة مطلوبة. الدفع عبر USDT فقط.</span>
+      <span data-fr>Commencez par un essai gratuit de 7 jours. Sans carte bancaire. Paiement via USDT.</span>
+    </p>
+    <div class="cta-btns">
+      <a href="https://t.me/YOUR_USERNAME" target="_blank" data-tg>
+        <button class="btn-primary">
+          <span data-en>Start free trial</span>
+          <span data-ar>ابدأ التجربة المجانية</span>
+          <span data-fr>Commencer l'essai gratuit</span>
+        </button>
+      </a>
+      <!-- IMPORTANT: Replace YOUR_USERNAME with your real Telegram username -->
+      <a href="https://t.me/YOUR_USERNAME" target="_blank">
+        <button class="btn-ghost">
+          <span data-en>Contact on Telegram</span>
+          <span data-ar>تواصل عبر Telegram</span>
+          <span data-fr>Contacter sur Telegram</span>
+        </button>
+      </a>
+    </div>
+    <p class="cta-note" data-en>App setup from $180 one-time &nbsp;·&nbsp; Basic from $15/mo &nbsp;·&nbsp; VIP from $35/mo</p>
+    <p class="cta-note" data-ar>إعداد التطبيق من $180 مرة واحدة &nbsp;·&nbsp; Basic من $15/شهر &nbsp;·&nbsp; VIP من $35/شهر</p>
+    <p class="cta-note" data-fr>Configuration à partir de $180 unique &nbsp;·&nbsp; Basic à partir de $15/mois &nbsp;·&nbsp; VIP à partir de $35/mois</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+     Why: Minimal — brand logo, copyright, and 3
+     basic links (Terms, Privacy, Contact). You can
+     fill in the Terms and Privacy pages later.
+════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-icon">PX</div>
+    <span class="footer-name">Phoenix Panel</span>
+  </div>
+  <span class="footer-copy">© 2025 Phoenix Panel. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="#" data-en>Terms of service</a>
+    <a href="#" data-ar>شروط الخدمة</a>
+    <a href="#" data-fr>Conditions d'utilisation</a>
+    <a href="#" data-en>Privacy</a>
+    <a href="#" data-ar>الخصوصية</a>
+    <a href="#" data-fr>Confidentialité</a>
+    <a href="#contact" data-en>Contact</a>
+    <a href="#contact" data-ar>تواصل</a>
+    <a href="#contact" data-fr>Contact</a>
+  </div>
+</footer>
+
+<script>
+// ─── TELEGRAM LINK ────────────────────────────────────────
+// 🔥 Only change this one line when you get your Telegram.
+// Every button on the page uses this variable automatically.
+const TG_LINK = 'https://t.me/YOUR_USERNAME';
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('[data-tg]').forEach(el => el.href = TG_LINK);
+});
+
+// ─── LANGUAGE SWITCHER ────────────────────────────────────
+// How it works: clicking EN/AR/FR sets data-lang on <html>
+// CSS [data-lang="en"] [data-en] { display: block } shows
+// only the matching language content. RTL is also toggled
+// automatically for Arabic via CSS direction:rtl on html[data-lang="ar"]
+function setLang(lang) {
+  document.documentElement.setAttribute('data-lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+  // Save preference so it persists on refresh
+  localStorage.setItem('px-lang', lang);
+}
+
+// Load saved language on page load
+const saved = localStorage.getItem('px-lang');
+if (saved) setLang(saved);
+
+// ─── SCROLL REVEAL ────────────────────────────────────────
+// How it works: IntersectionObserver watches all .reveal
+// elements. When they enter the viewport (10% visible),
+// the "visible" class is added which triggers the CSS
+// transition (opacity + translateY). Simple and no library.
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target); // only animate once
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ─── MOBILE MENU ─────────────────────────────────────────
+// Simple toggle — adds inline style to show nav links
+// on mobile. You can extend this later with a proper
+// full-screen mobile nav if needed.
+let menuOpen = false;
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  const links = document.querySelector('.nav-links');
+  if (menuOpen) {
+    links.style.cssText = 'display:flex;flex-direction:column;gap:0;position:fixed;top:64px;left:0;right:0;background:rgba(8,8,8,0.97);padding:20px;border-bottom:0.5px solid #ffffff0f;z-index:99;backdrop-filter:blur(20px)';
+    links.querySelectorAll('a').forEach(a => {
+      a.style.cssText = 'padding:14px 0;border-bottom:0.5px solid #ffffff0a;font-size:15px;color:#a89585';
+    });
+  } else {
+    links.style.cssText = 'display:none';
+  }
+}
+
+// Close menu on link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    if (menuOpen) toggleMenu();
+  });
+});
+</script>
+</body>
+</html>
